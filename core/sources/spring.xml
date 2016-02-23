@@ -18,9 +18,12 @@
 		<property name="userService" ref="userService"/>
 	</bean>
 
-	<bean id="dao" class="com.epam.spring.club.DAO.DAO"></bean>
+	<bean id="dao" class="com.epam.spring.club.DAO.DAO_temp"></bean>
 	<bean id="counterAspect" class="com.epam.spring.aspects.CounterAspect"></bean>
-	<bean id="discountAspect" class="com.epam.spring.aspects.DiscountAspect"></bean>
+	<bean id="discountAspect" class="com.epam.spring.aspects.DiscountAspect" autowire="byType">
+		<property name="counterDaoImp" ref="counterDaoImp"></property>
+	</bean>
 	
+	<bean id="counterDaoImp" class="com.epam.spring.club.DAO.CounterDaoImp"></bean>
 
 </beans>

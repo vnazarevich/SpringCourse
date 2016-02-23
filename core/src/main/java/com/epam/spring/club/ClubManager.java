@@ -30,11 +30,13 @@ public class ClubManager {
 		userService.registration(user.getName(), user.getPass(), user.getMail(), user.getBirthDay());
 
 		//Check DiscountService
+		/*
 		System.out.println(discountService.getDiscountStrategiesList());
 		double discount = discountService.getDiscount(user, event, new LocalDate(2016, 3, 2));
 		
 		user.setNumberOfPurchasedTickets(9);
 		discount = discountService.getDiscount(user, event, new LocalDate(2016, 3, 2));		
+		*/
 		
 		//Check BookingService
 		bookingService.getTicketPrice(event, new LocalDate(2016,3,3), user) ;

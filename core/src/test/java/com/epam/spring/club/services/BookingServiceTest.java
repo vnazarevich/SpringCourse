@@ -7,21 +7,21 @@ import org.joda.time.LocalTime;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.epam.spring.club.DAO.DAO;
+import com.epam.spring.club.DAO.DAO_temp;
 import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
 
 public class BookingServiceTest {
 	private static BookingService bookingService;
 	private static Event event;
-	private static DAO dao;
+	private static DAO_temp dao;
 	private static User user;
 	private static UserService userService;
 	private static EventService eventService;
 	
 	@BeforeClass
 	public static void initialisation() {
-		dao = new DAO ();
+		dao = new DAO_temp ();
 		bookingService = new BookingService();
 		eventService = new EventService();
 		eventService.setEvents(dao.getEvents());
