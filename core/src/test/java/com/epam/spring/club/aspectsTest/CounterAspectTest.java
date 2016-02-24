@@ -49,7 +49,7 @@ public class CounterAspectTest extends AbstractJUnit4SpringContextTests  {
 	@Test
 	public void logEventPriceRequestTest(){
 		Event event = eventService.getEventByName("Scorpions");
-		User user = userService.getUserByName("Vik");
+		User user = userService.getUserByName("Sheldon");
 		bookingService.getTicketPrice(event, new LocalDate(2016,4,7), user);
 		System.out.println(counterAspect.getCountersMap() + "  $");
 		Integer count = counterAspect.getCountersMap().get("Scorpions").getNumberOfPriceRequestings();	
