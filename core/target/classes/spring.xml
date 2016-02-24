@@ -21,9 +21,9 @@
 	<bean id="dao" class="com.epam.spring.club.DAO.DAO_temp"></bean>
 	<bean id="counterAspect" class="com.epam.spring.aspects.CounterAspect"></bean>
 	<bean id="discountAspect" class="com.epam.spring.aspects.DiscountAspect" autowire="byType">
-		<property name="counterDaoImp" ref="counterDaoImp"></property>
+		<property name="counterRepositoryImp" ref="counterRepositoryImp"></property>
 	</bean>
 	
-	<bean id="counterDaoImp" class="com.epam.spring.club.DAO.CounterDaoImp"></bean>
+	<bean id="counterRepositoryImp" class="com.epam.spring.club.DAO.CounterRepositoryImp"></bean>
 
 </beans>

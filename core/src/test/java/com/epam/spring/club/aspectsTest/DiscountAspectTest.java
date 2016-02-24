@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.epam.spring.aspects.DiscountAspect;
-import com.epam.spring.club.DAO.CounterDaoImp;
+import com.epam.spring.club.DAO.CounterRepositoryImp;
 import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
 import com.epam.spring.club.services.BookingService;
@@ -33,7 +33,7 @@ public class DiscountAspectTest {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private CounterDaoImp counterDaoImp;
+	private CounterRepositoryImp counterDaoImp;
 	
 	private User user;
 	private Event event;

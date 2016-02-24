@@ -25,9 +25,9 @@ public class ClubManager {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		ClubManager manager = (ClubManager) ctx.getBean("clubManager");
 
-		User user = new User("Sunreis", "1234", "sun@gmail.com", new LocalDate(1988, 12, 5));
-		Event event = new Event("Aerosmith", "GREEN", new LocalDate(2016,3,7), new LocalTime(19,0,0), 100, 400);
-		userService.registration(user.getName(), user.getPass(), user.getMail(), user.getBirthDay());
+//		User user = new User("Sunreis", "1234", "sun@gmail.com", new LocalDate(1988, 12, 5));
+//		Event event = new Event("Aerosmith", "GREEN", new LocalDate(2016,3,7), new LocalTime(19,0,0), 100, 400);
+//		userService.registration(user.getName(), user.getPass(), user.getMail(), user.getBirthDay());
 
 		//Check DiscountService
 		/*
@@ -39,6 +39,8 @@ public class ClubManager {
 		*/
 		
 		//Check BookingService
+		User user = userService.getUserByName("Sheldon");
+		Event event = eventService.getEventByName("Aerosmith");
 		bookingService.getTicketPrice(event, new LocalDate(2016,3,3), user) ;
 		bookingService.getVipTicketPrice(event, new LocalDate(2016,3,3), user);
 		bookingService.bookTicket(user, event, 2);

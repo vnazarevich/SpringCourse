@@ -10,7 +10,7 @@ import com.epam.spring.aspects.DiscountAspect;
 import com.epam.spring.club.models.Counter;
 import com.epam.spring.club.models.User;
 
-public class CounterDaoImp extends DAO implements CounterDao {
+public class CounterRepositoryImp extends DAO implements CounterRepository {
 	
 	//MockData for testing
 	DataBase db = new DataBase();

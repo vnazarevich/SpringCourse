@@ -2,16 +2,26 @@ package com.epam.spring.club.services;
 
 import java.util.logging.Logger;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
+import com.epam.spring.club.DAO.interfaces.ClientTicketRepository;
+import com.epam.spring.club.DAO.interfaces.CountersRepository;
+import com.epam.spring.club.DAO.interfaces.ShowRepository;
+import com.epam.spring.club.DAO.interfaces.TicketRepository;
+import com.epam.spring.club.DAO.interfaces.UserRepository;
 import com.epam.spring.club.models.Event;
+import com.epam.spring.club.models.Ticket;
 import com.epam.spring.club.models.User;
 
 public class BookingService {
 	private static Logger log = Logger.getLogger(BookingService.class.getName());
 	private DiscountService discountService;
 	private EventService eventService;
+    private TicketRepository ticketRepository;
+    private ClientTicketRepository clientTicketRepository;
+    private UserRepository userRepository;
+    private ShowRepository showRepository;
+    private CountersRepository countersRepository;
 	
 	public double getTicketPrice(Event event, LocalDate date, User user){
 		double price;
@@ -29,6 +39,8 @@ public class BookingService {
 		log.info("return price for ticket = " + price);
 		return price;
 	}
+	
+	
 	
 	/*
 	 * return false if user is not registered
@@ -52,6 +64,15 @@ public class BookingService {
 		}
 		return true;
 	}
+	
+	public Ticket bookTicket(String userName, Ticket ticket){
+        User user = userRepository.getUserByName(userName);
+
+        if(user != null){
+            clientTicketRepository.addTicket(new String(""+user.getId()), ticket.getTicketId());
+        }
+        return ticketRepository.bookTiket(ticket.getTicketId());
+    }
 	
 	public DiscountService getDiscountService() {
 		return discountService;
