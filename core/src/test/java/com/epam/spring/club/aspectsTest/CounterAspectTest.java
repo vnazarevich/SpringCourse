@@ -33,16 +33,12 @@ public class CounterAspectTest extends AbstractJUnit4SpringContextTests  {
 	@Autowired
 	private UserService userService;	
 	
-	public CounterAspectTest() {
-
-	}
 	
 	@Test
 	public void logCallEventByNameTest(){
 		eventService.getEventByName("Aerosmith");
 		Integer count = counterAspect.getCountersMap().get("Aerosmith").getNumberCallingsByName();	
-		eventService.getEventByName("Aerosmith");
-		
+		eventService.getEventByName("Aerosmith");	
 		assertEquals(++count, Integer.valueOf(counterAspect.getCountersMap().get("Aerosmith").getNumberCallingsByName()));
 	}
 	
@@ -50,8 +46,7 @@ public class CounterAspectTest extends AbstractJUnit4SpringContextTests  {
 	public void logEventPriceRequestTest(){
 		Event event = eventService.getEventByName("Scorpions");
 		User user = userService.getUserByName("Sheldon");
-		bookingService.getTicketPrice(event, new LocalDate(2016,4,7), user);
-		System.out.println(counterAspect.getCountersMap() + "  $");
+		bookingService.getTicketPrice(event, new LocalDate(2016,4,7), user);;
 		Integer count = counterAspect.getCountersMap().get("Scorpions").getNumberOfPriceRequestings();	
 		bookingService.getTicketPrice(event, new LocalDate(2018, 10, 8), user);
 		assertEquals(++count, Integer.valueOf(counterAspect.getCountersMap().get("Scorpions").getNumberOfPriceRequestings()), 0.00001);
@@ -60,14 +55,11 @@ public class CounterAspectTest extends AbstractJUnit4SpringContextTests  {
 	@Test 
 	public void bookTicketTest(){
 		User user = userService.getUserByName("Sheldon");
-		System.out.println(user.toString());
 		Event event = eventService.getEventByName("Aerosmith");
 		bookingService.bookTicket(user, event, 1);
 		Integer count = counterAspect.getCountersMap().get("Aerosmith").getNumberOfBookedTickets();	
 		bookingService.bookTicket(user, event, 1);
 		assertEquals(++count, Integer.valueOf(counterAspect.getCountersMap().get("Aerosmith").getNumberOfBookedTickets()));
-	
-	
 	}
 
 }
