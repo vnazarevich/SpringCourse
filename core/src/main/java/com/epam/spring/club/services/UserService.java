@@ -25,10 +25,10 @@ public class UserService {
 		}
 	}
 	
-	public boolean registration (String login, String pass, String mail, LocalDate bithday){	
+	public boolean registerUser (String login, String pass, String mail, LocalDate bithday){	
 		try {
 			users.put(login, new User(login, pass, mail, bithday));
-			log.info("New user "+ login +"  was registres" );
+			log.info("New user "+ login +"  was registred" );
 			return true;
 		}catch (Exception e){
 			log.info("Registration failed");
@@ -36,6 +36,20 @@ public class UserService {
 			return false;
 		}
 	}
+	
+	public boolean registerUser (String login, String mail){	
+		try {
+			users.put(login, new User(login, mail));
+			log.info("New user "+ login +"  was registred" );
+			return true;
+		}catch (Exception e){
+			log.info("Registration failed");
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
 	
 	public User getUserById(int id){
 		for (User user: users.values()){

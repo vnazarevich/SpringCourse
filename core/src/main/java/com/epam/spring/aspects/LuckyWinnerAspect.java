@@ -17,7 +17,7 @@ public class LuckyWinnerAspect {
 	@Before("execution(* *.bookTicket(..)) && args(user, event, count)")
 	private void isUserLuky(User user, Event event, int count){
 		  if (new Random().nextBoolean()){
-			  event.setTicketPrice(0);
+			  //event.setTicketPrice(0);
 			  log.info("User " + user.getName() + " is lucky ");
 			  System.out.println("User " + user.getName() + " is lucky ");
 		  }	

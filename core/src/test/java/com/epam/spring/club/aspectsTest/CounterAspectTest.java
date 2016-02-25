@@ -2,8 +2,10 @@ package com.epam.spring.club.aspectsTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import org.joda.time.LocalDate;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.epam.spring.aspects.CounterAspect;
 import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
+import com.epam.spring.club.services.AuditoriumService;
 import com.epam.spring.club.services.BookingService;
 import com.epam.spring.club.services.EventService;
 import com.epam.spring.club.services.UserService;
@@ -31,6 +34,8 @@ public class CounterAspectTest extends AbstractJUnit4SpringContextTests  {
 	@Autowired
 	private BookingService bookingService;
 	@Autowired
+	private AuditoriumService auditoriumService;
+	@Autowired
 	private UserService userService;	
 	
 	
@@ -46,9 +51,9 @@ public class CounterAspectTest extends AbstractJUnit4SpringContextTests  {
 	public void logEventPriceRequestTest(){
 		Event event = eventService.getEventByName("Scorpions");
 		User user = userService.getUserByName("Sheldon");
-		bookingService.getTicketPrice(event, new LocalDate(2016,4,7), user);;
+		bookingService.getTicketPrice(event, "1", new GregorianCalendar(2016, 2, 12).getTime(), 5, user.getName());
 		Integer count = counterAspect.getCountersMap().get("Scorpions").getNumberOfPriceRequestings();	
-		bookingService.getTicketPrice(event, new LocalDate(2018, 10, 8), user);
+		bookingService.getTicketPrice(event, "1", new GregorianCalendar(2016, 2, 12).getTime(), 5, user.getName());
 		assertEquals(++count, Integer.valueOf(counterAspect.getCountersMap().get("Scorpions").getNumberOfPriceRequestings()), 0.00001);
 	}
 	

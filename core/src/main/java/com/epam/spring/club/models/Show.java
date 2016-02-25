@@ -15,9 +15,39 @@ public class Show {
         this.eventId = eventId;
         this.date = date;
         this.auditoriumId = auditorium;
-    }
+    }   
 
-    public String getShowId() {
+    public String getEventId() {
+		return eventId;
+	}
+
+
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
+
+
+
+	public String getAuditoriumId() {
+		return auditoriumId;
+	}
+
+
+
+	public void setAuditoriumId(String auditoriumId) {
+		this.auditoriumId = auditoriumId;
+	}
+
+
+
+	public void setShowId(String showId) {
+		this.showId = showId;
+	}
+
+
+
+	public String getShowId() {
         return showId;
     }
 

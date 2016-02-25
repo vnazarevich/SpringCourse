@@ -1,5 +1,6 @@
 package com.epam.spring.club.services;
 
+import java.util.Date;
 import java.util.logging.Logger;
 
 import org.joda.time.LocalDate;
@@ -10,6 +11,7 @@ import com.epam.spring.club.DAO.interfaces.ShowRepository;
 import com.epam.spring.club.DAO.interfaces.TicketRepository;
 import com.epam.spring.club.DAO.interfaces.UserRepository;
 import com.epam.spring.club.models.Event;
+import com.epam.spring.club.models.Show;
 import com.epam.spring.club.models.Ticket;
 import com.epam.spring.club.models.User;
 
@@ -23,24 +25,20 @@ public class BookingService {
     private ShowRepository showRepository;
     private CountersRepository countersRepository;
 	
-	public double getTicketPrice(Event event, LocalDate date, User user){
-		double price;
-		price = eventService.getEventByName(event.getName()).getTicketPrice();
-		price = price*(1 - discountService.getDiscount(user, event, date));
-		log.info("return price for ticket = " + price);
-		return price;
-	}
+    public Ticket getTicketPrice(Event event, String auditoriumId, Date date, int seat, String userName){
+        Show show = showRepository.getShow(event.getEventId(), auditoriumId, date);
+        return ticketRepository.getTicket(show.getShowId(), seat);
+    }
 	
 	public double getVipTicketPrice(Event event, LocalDate date, User user){
-		double price;
-		price = eventService.getEventByName(event.getName()).getVipTicketPrice();
-		System.out.println(price);
-		price = price*(1 - discountService.getDiscount(user, event, date));
-		log.info("return price for ticket = " + price);
-		return price;
+//		double price;
+//		price = eventService.getEventByName(event.getName()).getVipTicketPrice();
+//		System.out.println(price);
+//		price = price*(1 - discountService.getDiscount(user, event, date));
+//		log.info("return price for ticket = " + price);
+//		return price;
+		return 0.1;
 	}
-	
-	
 	
 	/*
 	 * return false if user is not registered

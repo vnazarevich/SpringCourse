@@ -31,23 +31,31 @@ public class User {
 		numberOfPurchasedTickets = 0;
 		log.info(this.toString());
 	}
-
+	
 	public User(String name, String pass, LocalDate birthDay) {
+		super();
 		this.name = name;
 		this.pass = pass;
-		this.mail = mail;
 		this.birthDay = birthDay;
+		//id = new Random().nextInt(1000);
 		bookedTickets = new HashMap<Event, Integer>();
-
+		numberOfPurchasedTickets = 0;
 	}
 
-	public User(String name, String pass) {
+	public User(int id, String name, String mail) {
+		super();
+		this.id = id;
 		this.name = name;
-		this.pass = pass;
 		this.mail = mail;
-		this.birthDay = null;
-		bookedTickets = new HashMap<Event, Integer>();
 	}
+	
+	public User(String name, String mail) {
+		super();
+		this.name = name;
+		this.mail = mail;
+	}
+
+
 
 	public int getId() {
 		return id;

@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+import com.epam.spring.club.EventRate;
 import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
 
@@ -18,8 +19,8 @@ public class DAO_temp {
 		put ("Vik", new User ("Vik", "root", new LocalDate(1988, 9, 9)));
 	}};
 	private HashMap <String, Event> events = new HashMap <String, Event>(){{
-		put ("Aerosmith", new Event("Aerosmith", "GREEN", new LocalDate(2016,3,7), new LocalTime(19,0,0), 100, 400));
-		put ("Scorpions", new Event("Scorpions", "BLACK", new LocalDate(2016,4,7), new LocalTime(20,0,0), 120, 400));
+		put ("Aerosmith", new Event("Aerosmith", 100, EventRate.HIGH));
+		put ("Scorpions", new Event("Scorpions", 120, EventRate.LOW));
 	}};
 
 	public HashMap<String, User> getUsers() {
