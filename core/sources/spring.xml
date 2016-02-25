@@ -1,6 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="
  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
@@ -9,21 +8,34 @@
 
 
 	<aop:aspectj-autoproxy />
- 		<import resource="services.xml"/>
+	<import resource="services.xml" />
 
 	<bean id="clubManager" class="com.epam.spring.club.ClubManager">
 		<property name="discountService" ref="discountService" />
 		<property name="bookingService" ref="bookingService" />
-		<property name="eventService" ref="eventService"/>
-		<property name="userService" ref="userService"/>
+		<property name="eventService" ref="eventService" />
+		<property name="userService" ref="userService" />
 	</bean>
 
 	<bean id="dao" class="com.epam.spring.club.DAO.DAO_temp"></bean>
 	<bean id="counterAspect" class="com.epam.spring.aspects.CounterAspect"></bean>
-	<bean id="discountAspect" class="com.epam.spring.aspects.DiscountAspect" autowire="byType">
+	
+	<bean id="discountAspect" class="com.epam.spring.aspects.DiscountAspect"
+		autowire="byType">
 		<property name="counterRepositoryImp" ref="counterRepositoryImp"></property>
 	</bean>
-	
+	<bean id="luckyWinnerAspect" class="com.epam.spring.aspects.LuckyWinnerAspect"></bean>
+
 	<bean id="counterRepositoryImp" class="com.epam.spring.club.DAO.CounterRepositoryImp"></bean>
+
+<!-- 	<bean -->
+<!-- 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!-- 		<property name="locations"> -->
+<!-- 			<list> -->
+<!-- 				<value>classpath:project-test.properties</value> -->
+<!-- 				<value>classpath:auditorium.propertis</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 </beans>
