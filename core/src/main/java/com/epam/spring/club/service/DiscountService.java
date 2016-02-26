@@ -24,14 +24,25 @@ public class DiscountService {
     public void setClientTicketRepository(ClientTicketRepository clientTicketRepository) {
         this.clientTicketRepository = clientTicketRepository;
     }
+    
+/*	public double getDiscount(User user, Event event, Date date){
+		List <Double> discountsList = new ArrayList();
+		for (StrategieDiscount strategy: discountStrategiesList ){
+			 discountsList.add(strategy.execute(user, event, date));
+		}
+		Collections.sort(discountsList);
+		Collections.reverse(discountsList);
+		log.info("discount = " + discountsList.get(0));
+		return discountsList.get(0);
+	}*/
 
-    public String getDiscount(User client, String eventId, Date date){
+   /* public String getDiscount(User client, String eventId, Date date){
         List<String> tickets = clientTicketRepository.getBookedTickets(String.valueOf(client.getId()));
         if((tickets.size() % 10) == 9){
             return "50";
         }
         return "0";
-    }
+    }*/
 	
 	public double getDiscount(User user, Event event, LocalDate date){
 		List <Double> discountsList = new ArrayList();

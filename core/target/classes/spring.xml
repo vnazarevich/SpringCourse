@@ -11,6 +11,7 @@
 
 	<import resource="repositories.xml" />
 	<import resource="aspects.xml" />
+	
 
 	<aop:aspectj-autoproxy />
 
@@ -37,8 +38,8 @@
 				static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		</property>
 	</bean>
-	
-		<bean id="blackAuditorium"
+
+	<bean id="blackAuditorium"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:blackAuditorium.properties" />
 		<property name="placeholderSuffix" value="}" />
@@ -49,7 +50,7 @@
 				static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		</property>
 	</bean>
-	
+
 	<bean id="planetakino"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:planetakino.properties" />
@@ -89,17 +90,30 @@
 		<property name="auditoriumRepository" ref="auditoriumRepositoryDao" />
 	</bean>
 
+
 	<bean id="bookingService" class="com.epam.spring.club.service.BookingService">
 		<property name="clientRepository" ref="clientRepositoryDao" />
 		<property name="clientTicketRepository" ref="clientTicketRepositoryDao" />
 		<property name="showRepository" ref="showRepositoryDao" />
 		<property name="ticketRepository" ref="ticketRepositoryDao" />
 		<property name="countersRepository" ref="countersRepositoryDao" />
+		<property name="discountService" ref="discountService" />
 	</bean>
+	
+	<bean id="discountService" class="com.epam.spring.club.service.DiscountService">
+		<property name="discountStrategiesList">
+			<list>
+				<bean class="com.epam.spring.club.strategies.BirthdayStrategie" />
+				<bean class="com.epam.spring.club.strategies.TenthTicketStrategi" />
+			</list>
+		</property>
+	</bean>
+	
+	
 
 	<bean id="clubManager" class="com.epam.spring.club.ClubManager">
 
 	</bean>
-	
+
 
 </beans>

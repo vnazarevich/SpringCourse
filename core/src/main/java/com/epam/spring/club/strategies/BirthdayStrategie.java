@@ -14,14 +14,15 @@ public class BirthdayStrategie implements StrategieDiscount {
 	private double discount = 0.05;
 
 	public double execute(User currentUser, Event event, LocalDate date) {
-		if (currentUser.getBirthDay().getMonthOfYear() == (date.getMonthOfYear()) &&
+		/*if (currentUser.getBirthDay().getMonthOfYear() == (date.getMonthOfYear()) &&
 				currentUser.getBirthDay().getDayOfMonth() == (date.getDayOfMonth())) {
 			//log.info("BirthdayStrategie return discount = " + discount);
 			return discount;
 		} else {
 			//log.info("BirthdayStrategie return discount = " + discount);
 			return 0;
-		}
+		}*/
+		return 0;
 	}
 }
  

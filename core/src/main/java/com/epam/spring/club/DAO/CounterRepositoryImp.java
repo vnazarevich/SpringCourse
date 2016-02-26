@@ -11,7 +11,7 @@ import com.epam.spring.club.DAO.interfaces.CounterRepository;
 import com.epam.spring.club.models.Counter;
 import com.epam.spring.club.models.User;
 
-public class CounterRepositoryImp extends DAO implements CounterRepository {
+public class CounterRepositoryImp implements CounterRepository {
 	
 	//MockData for testing
 	DataBase db = new DataBase();
