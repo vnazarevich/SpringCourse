@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.joda.time.LocalDate;
 
-import com.epam.spring.aspects.DiscountAspect;
+import com.epam.spring.aspect.DiscountAspect;
 import com.epam.spring.club.DAO.interfaces.CounterRepository;
 import com.epam.spring.club.models.Counter;
 import com.epam.spring.club.models.User;

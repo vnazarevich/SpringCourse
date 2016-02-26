@@ -1,4 +1,4 @@
-package com.epam.spring.aspects;
+package com.epam.spring.aspect;
 
 import java.util.Map;
 import java.util.logging.Logger;

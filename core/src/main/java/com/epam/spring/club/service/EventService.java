@@ -1,4 +1,4 @@
-package com.epam.spring.club.services;
+package com.epam.spring.club.service;
 
 import java.util.ArrayList;
 import java.util.Date;

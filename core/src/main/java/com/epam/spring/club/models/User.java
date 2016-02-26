@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import org.joda.time.LocalDate;
 
-import com.epam.spring.club.services.DiscountService;
+import com.epam.spring.club.service.DiscountService;
 
 public class User {
 	private static Logger log = Logger.getLogger(User.class.getName());

@@ -1,4 +1,4 @@
-package com.epam.spring.club.services;
+package com.epam.spring.club.service;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -40,6 +40,10 @@ public class AuditoriumService {
 			}
 		}
 		return 0;
+	}
+
+	public void setAuditoriumRepository(AuditoriumRepository auditoriumRepository) {
+		this.auditoriumRepository = auditoriumRepository;
 	}
 	
 	

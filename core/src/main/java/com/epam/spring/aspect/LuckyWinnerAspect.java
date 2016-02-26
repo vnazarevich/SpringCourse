@@ -1,4 +1,4 @@
-package com.epam.spring.aspects;
+package com.epam.spring.aspect;
 
 import java.util.Random;
 import java.util.logging.Logger;
@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Before;
 
 import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
-import com.epam.spring.club.services.BookingService;
+import com.epam.spring.club.service.BookingService;
 
 @Aspect
 public class LuckyWinnerAspect {

@@ -7,7 +7,7 @@ import org.joda.time.LocalDate;
 
 import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
-import com.epam.spring.club.services.DiscountService;
+import com.epam.spring.club.service.DiscountService;
 
 public class BirthdayStrategie implements StrategieDiscount {
 	private static Logger log = Logger.getLogger(BirthdayStrategie.class.getName());

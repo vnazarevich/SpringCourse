@@ -1,4 +1,4 @@
-package com.epam.spring.club.services;
+package com.epam.spring.club.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,10 +7,15 @@ import java.util.logging.Logger;
 import org.joda.time.LocalDate;
 
 import com.epam.spring.club.ClubManager;
+import com.epam.spring.club.DAO.interfaces.ClientTicketRepository;
+import com.epam.spring.club.DAO.interfaces.UserRepository;
 import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
 
 public class UserService {
+    private String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+    private UserRepository clientRepository;
+    private ClientTicketRepository clientTicketRepository;
 	private static Logger log = Logger.getLogger(UserService.class.getName());
 	private static HashMap <String, User> users;
 	
@@ -107,6 +112,15 @@ public class UserService {
 
 	public static void setUsers(HashMap<String, User> users) {
 		UserService.users = users;
+	}
+
+	public void setClientRepository(UserRepository clientRepository) {
+		this.clientRepository = clientRepository;
+	}
+
+	public void setClientTicketRepository(
+			ClientTicketRepository clientTicketRepository) {
+		this.clientTicketRepository = clientTicketRepository;
 	}
 	
 	

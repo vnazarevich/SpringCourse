@@ -1,4 +1,4 @@
-package com.epam.spring.club.services;
+package com.epam.spring.club.service;
 
 import java.util.Date;
 import java.util.logging.Logger;
@@ -21,7 +21,7 @@ public class BookingService {
 	private EventService eventService;
     private TicketRepository ticketRepository;
     private ClientTicketRepository clientTicketRepository;
-    private UserRepository userRepository;
+    private UserRepository clientRepository;
     private ShowRepository showRepository;
     private CountersRepository countersRepository;
 	
@@ -64,7 +64,7 @@ public class BookingService {
 	}
 	
 	public Ticket bookTicket(String userName, Ticket ticket){
-        User user = userRepository.getUserByName(userName);
+        User user = clientRepository.getUserByName(userName);
 
         if(user != null){
             clientTicketRepository.addTicket(new String(""+user.getId()), ticket.getTicketId());
@@ -86,6 +86,27 @@ public class BookingService {
 
 	public void setEventService(EventService eventService) {
 		this.eventService = eventService;
+	}
+
+	public void setTicketRepository(TicketRepository ticketRepository) {
+		this.ticketRepository = ticketRepository;
+	}
+
+	public void setClientTicketRepository(
+			ClientTicketRepository clientTicketRepository) {
+		this.clientTicketRepository = clientTicketRepository;
+	}
+
+	public void setClientRepository(UserRepository clientRepository) {
+		this.clientRepository = clientRepository;
+	}
+
+	public void setShowRepository(ShowRepository showRepository) {
+		this.showRepository = showRepository;
+	}
+
+	public void setCountersRepository(CountersRepository countersRepository) {
+		this.countersRepository = countersRepository;
 	}
 	
 	
