@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+ 		http://www.springframework.org/schema/jdbc
+ 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:db/create-db.sql" />
+    </jdbc:embedded-database>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+
+   <!--  <bean id="auditoriumRepositoryStatic" class="com.epam.spring.club.DAO.pojo.AuditoriumRepositoryDAO">
+        <property name="auditoriumList">
+            <list>
+                <bean id="auditorium" class="com.epam.spring.club.model.Auditorium">
+                    <constructor-arg value="$kp{name}"/>
+                    <constructor-arg value="$kp{seatsNumber}"/>
+                    <constructor-arg value="#{'$kp{vipSeats}'.split(',')}"/>
+                    <property name="auditoriumId" value="$kp{id}"/>
+                </bean>
+                <bean id="auditorium" class="com.epam.spring.club.model.Auditorium">
+                    <constructor-arg value="$pk{name}"/>
+                    <constructor-arg value="$pk{seatsNumber}"/>
+                    <constructor-arg value="#{'$pk{vipSeats}'.split(',')}"/>
+                    <property name="auditoriumId" value="$pk{id}"/>
+                </bean>
+                <bean id="auditorium" class="com.epam.spring.club.model.Auditorium">
+                    <constructor-arg value="$dn{name}"/>
+                    <constructor-arg value="$dn{seatsNumber}"/>
+                    <constructor-arg value="#{'$dn{vipSeats}'.split(',')}"/>
+                    <property name="auditoriumId" value="$dn{id}"/>
+                </bean>
+            </list>
+        </property>
+    </bean> -->
+
+
+    <bean id="auditoriumRepositoryDao" class="com.epam.spring.club.DAO.AuditoriumRepositoryDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+        <property name="auditoriumList">
+            <list>
+                <bean id="auditorium" class="com.epam.spring.club.models.Auditorium">
+                    <constructor-arg value="$kp{name}"/>
+                    <constructor-arg value="$kp{seatsNumber}"/>
+                    <constructor-arg value="#{'$kp{vipSeats}'.split(',')}"/>
+                    <property name="auditoriumId" value="$kp{id}"/>
+                </bean>
+                <bean id="auditorium" class="com.epam.spring.club.models.Auditorium">
+                    <constructor-arg value="$pk{name}"/>
+                    <constructor-arg value="$pk{seatsNumber}"/>
+                    <constructor-arg value="#{'$pk{vipSeats}'.split(',')}"/>
+                    <property name="auditoriumId" value="$pk{id}"/>
+                </bean>
+                <bean id="auditorium" class="com.epam.spring.club.models.Auditorium">
+                    <constructor-arg value="$dn{name}"/>
+                    <constructor-arg value="$dn{seatsNumber}"/>
+                    <constructor-arg value="#{'$dn{vipSeats}'.split(',')}"/>
+                    <property name="auditoriumId" value="$dn{id}"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="clientTicketRepositoryDao" class="com.epam.spring.club.DAO.ClientTicketRepositoryDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="eventRepositoryDao" class="com.epam.spring.club.DAO.EventRepositoryDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="showRepositoryDao" class="com.epam.spring.club.DAO.ShowRepositoryDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="countersRepositoryDao" class="com.epam.spring.club.DAO.CountersRepositoryDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="discountStatisticsRepositoryDao" class="com.epam.spring.club.DAO.DiscountStatisticsRepositoryDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+</beans>
