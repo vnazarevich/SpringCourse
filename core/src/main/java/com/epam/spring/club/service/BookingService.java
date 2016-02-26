@@ -30,44 +30,11 @@ public class BookingService {
         return ticketRepository.getTicket(show.getShowId(), seat);
     }
 	
-	public double getVipTicketPrice(Event event, LocalDate date, User user){
-//		double price;
-//		price = eventService.getEventByName(event.getName()).getVipTicketPrice();
-//		System.out.println(price);
-//		price = price*(1 - discountService.getDiscount(user, event, date));
-//		log.info("return price for ticket = " + price);
-//		return price;
-		return 0.1;
-	}
-	
-	/*
-	 * return false if user is not registered
-	 * else book ticket and return true
-	 */
-	public boolean bookTicket(User user, Event event, int count){
-		if (null == user){
-			log.info("User is anonimus");
-			return false;
-		}
-		// check free places
-		//int freePlaces = event.getAuditorium().getFreePlaceCount();
-		int freePlaces = 100;
-		if(freePlaces >= count){
-			user.setBookTickets(event, count);
-			//event.getAuditorium().setFreePlaceCount(freePlaces + count);		
-			log.info("User" + user.getName() + "has booked " + count + " tickets on " + event.getName());
-			
-		} else {
-			log.info("There are not enough places");
-		}
-		return true;
-	}
-	
 	public Ticket bookTicket(String userName, Ticket ticket){
         User user = clientRepository.getUserByName(userName);
 
         if(user != null){
-            clientTicketRepository.addTicket(new String(""+user.getId()), ticket.getTicketId());
+            clientTicketRepository.addTicket(String.valueOf(user.getId()), ticket.getTicketId());
         }
         return ticketRepository.bookTiket(ticket.getTicketId());
     }

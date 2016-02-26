@@ -19,100 +19,76 @@ import com.epam.spring.club.service.EventService;
 import com.epam.spring.club.service.UserService;
 
 public class ClubManager {
-	
-	//Session imitation
+
+	// Session imitation
 	public static User currentUser;
 	private static DiscountService discountService;
 	private static BookingService bookingService;
 	private static EventService eventService;
 	private static UserService userService;
 	public final static Logger logger = Logger.getLogger(ClubManager.class);
-	
+
 	public static void main(String[] args) {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"spring.xml");
 		ClubManager manager = (ClubManager) ctx.getBean("clubManager");
-		//create services
-        AuditoriumService auditoriumService = ctx.getBean("auditoriumService", AuditoriumService.class);
-        UserService userService = ctx.getBean("clientService", UserService.class);
-        EventService eventService = ctx.getBean("eventService", EventService.class);
-        BookingService bookingService = ctx.getBean("bookingService", BookingService.class);
-        DiscountService discountService = ctx.getBean("discountService", DiscountService.class);
-
-        logger.info("Register user Sheldon, sheldon@google.com");
-        userService.registerUser("Sheldon", "sheldon@google.com");
-
-        logger.info("Check user:");
-        User user = userService.getUsersByName("Sheldon");
-        logger.info(user.toString());
-
-        logger.info("Create event: Star Wars with base price 250.00");
-        eventService.create("Star Wars", 250, EventRate.HIGH);
-        
-        logger.info("Check if event was created:");
-        Event event = eventService.getByName("Star Wars");
-        logger.info(event.toString());
-
-        logger.info("Assigne auditorium");
-        List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
-        Auditorium kinopalace;
-        Show show = null;
-
-        for(Auditorium auditorium : auditoriums){
-            if(auditorium.getName().equals("Kinopalace")){
-                logger.info(auditorium);
-                kinopalace = auditorium;
-                show = eventService.assignAuditorium(event, kinopalace, new GregorianCalendar(2016, 2, 12).getTime());
-                break;
-            }
-        }
-
-        logger.info("Show was created:");
-        if (show != null) {
-            logger.info(show.toString());
-        }
-
-        logger.info("Get tiket price for the show:");
-        Ticket ticket = bookingService.getTicketPrice(event, show.getAuditorium(), show.getDate(), 2, user.getName());
-        logger.info(ticket.toString());
-
-        logger.info("Book tiket");
-        Ticket bookedTicket = bookingService.bookTicket(user.getName(), ticket);
-        logger.info(bookedTicket.toString());
-
-        //System.out.println("Aspect - " + discountService.getDiscountStatisticsByUser(user));
-       // String discount = discountService.getDiscount(user, event.getName(), new GregorianCalendar(2016, 2, 12).getTime());
-      //  logger.info("You got discount " + discount + "%");
-        //System.out.println("Aspect - " + discountService.getDiscountStatisticsByUser(user));
-
-
-        logger.info("Get all tikets for the user");
-       // List<String> ticketList = userService.getBookedTickets(user);
-    //    logger.info(ticketList);
-    
-}
-
-
-//		User user = new User("Sunreis", "1234", "sun@gmail.com", new LocalDate(1988, 12, 5));
-//		Event event = new Event("Aerosmith", "GREEN", new LocalDate(2016,3,7), new LocalTime(19,0,0), 100, 400);
-//		userService.registration(user.getName(), user.getPass(), user.getMail(), user.getBirthDay());
-
-		//Check DiscountService
-		/*
-		System.out.println(discountService.getDiscountStrategiesList());
-		double discount = discountService.getDiscount(user, event, new LocalDate(2016, 3, 2));
+		// create services
+		AuditoriumService auditoriumService = ctx.getBean("auditoriumService",
+				AuditoriumService.class);
+		UserService userService = ctx.getBean("clientService",
+				UserService.class);
+		EventService eventService = ctx.getBean("eventService",
+				EventService.class);
+		BookingService bookingService = ctx.getBean("bookingService",
+				BookingService.class);
+		DiscountService discountService = ctx.getBean("discountService",
+				DiscountService.class);
 		
-		user.setNumberOfPurchasedTickets(9);
-		discount = discountService.getDiscount(user, event, new LocalDate(2016, 3, 2));		
-		*/
+		// check userService
+		logger.info("Create user Sheldon, sheldon@google.com");
+		userService.registerUser("Sheldon", "sheldon@google.com");
+		logger.info("Check user:");
+		User user = userService.getUsersByName("Sheldon");
+		logger.info(user.toString());
 		
-		//Check BookingService
-//		User user = userService.getUserByName("Sheldon");
-//		Event event = eventService.getEventByName("Aerosmith");
-		//bookingService.getTicketPrice(event, new LocalDate(2016,3,3), user) ;
-//		bookingService.getVipTicketPrice(event, new LocalDate(2016,3,3), user);
-//		bookingService.bookTicket(user, event, 2);
+		//check eventService
+		logger.info("Create new event: Armagedon");
+		eventService.create("Armagedon", 250, EventRate.HIGH);
+		logger.info("Check event Armagedon");
+		Event event = eventService.getByName("Armagedon");
+		logger.info(event.toString());
 		
-//	}
+		//check auditoriumService
+		List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
+		Auditorium kinopalace;
+		Show show = null;
+		for (Auditorium auditorium : auditoriums) {
+			if (auditorium.getName().equals("Kinopalace")) {
+				logger.info(auditorium);
+				kinopalace = auditorium;
+				show = eventService.assignAuditorium(event, kinopalace,
+						new GregorianCalendar(2016, 2, 12).getTime());
+				break;
+			}
+		}
+		logger.info("Show was created:");
+		if (show != null) {
+			logger.info(show.toString());
+		}
+
+		//check bookingService
+		logger.info("Get tiket price for the show:");
+		Ticket ticket = bookingService.getTicketPrice(event,
+				show.getAuditorium(), show.getDate(), 2, user.getName());
+		logger.info(ticket.toString());
+
+		logger.info("Book tiket");
+		Ticket bookedTicket = bookingService.bookTicket(user.getName(), ticket);
+		logger.info(bookedTicket.toString());
+
+	}
+
+	
 
 	public DiscountService getDiscountService() {
 		return discountService;
@@ -145,6 +121,5 @@ public class ClubManager {
 	public static void setUserService(UserService userService) {
 		ClubManager.userService = userService;
 	}
-	
-	
+
 }
