@@ -1,15 +1,10 @@
 package com.epam.spring.club.service;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Logger;
 
-import org.joda.time.LocalDate;
-
-import com.epam.spring.club.ClubManager;
 import com.epam.spring.club.DAO.interfaces.ClientTicketRepository;
 import com.epam.spring.club.DAO.interfaces.UserRepository;
-import com.epam.spring.club.models.Event;
 import com.epam.spring.club.models.User;
 
 public class UserService {
@@ -19,101 +14,61 @@ public class UserService {
 	private static Logger log = Logger.getLogger(UserService.class.getName());
 	private static HashMap <String, User> users;
 	
-	public boolean login(String login, String pass){
-		checkLoginPass(login, pass);
-		if (checkLoginPass(login, pass)){
-			log.info("Authentication is successful");
-			return true;
-		} else {
-			log.info("Authentication failed");
-			return false;
-		}
-	}
 	
-	public boolean registerUser (String login, String pass, String mail, LocalDate bithday){	
-		try {
-			users.put(login, new User(login, pass, mail, bithday));
-			log.info("New user "+ login +"  was registred" );
-			return true;
-		}catch (Exception e){
-			log.info("Registration failed");
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	public boolean registerUser (String login, String mail){	
-		try {
-			users.put(login, new User(login, mail));
-			log.info("New user "+ login +"  was registred" );
-			return true;
-		}catch (Exception e){
-			log.info("Registration failed");
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	
-	
-	public User getUserById(int id){
-		for (User user: users.values()){
-			if (user.getId() == id){
-				log.info("find user " + user.getName() + " by id=" +id);
-				return user;
-			}
-		}
-		log.info("user with" + " id=" +id + "does not exist");
-		return null;
-	}
-	
-	public Map <Event, Integer> getBookedTickets(String name){
-		log.info("find booked tickets for user " + name );
-		return users.get(name).getBookedTickets();
-	}
-	
-	public User getUserByName(String name){
-		for (User user: users.values()){
-			if (user.getName() == name){
-				log.info("find user " + user.getName() + " by name=" + name);
-				return user;
-			}
-		}
-		log.info("user with" + " name=" + name + "does not exist");
-		return null;
-	}
-	
-	public User getUserByMail(String mail){
-		for (User user: users.values()){
-			if (user.getMail() == mail){
-				log.info("find user " + user.getName() + " by mail=" + mail);
-				return user;
-			}
-		}
-		log.info("user with" + " mail=" + mail + "does not exist");
-		return null;
-	}
+	public String registerUser(String name, String email){
+		if(email.matches(EMAIL_REGEX) && name.length() > 0){
+            return clientRepository.registerUser(name, email);
+        }
+        else {
+        	log.info("New user "+ name +"  was registred" );
+            return null;
+        }
+    }
 
-	private boolean checkLoginPass(String login, String pass){
-		User user = users.get(login);
-		if (null != user && user.getPass().equals(pass)){
-			//Session imitation
-			ClubManager.currentUser = user;
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
+	 public User removeUser(User client){
+	        User removedUser = clientRepository.removeUser(client);
+	        if(removedUser != null){
+	            return removedUser;
+	        }
+	        else {
+	        	log.info("No such client to remove");
+	            return null;
+	        }
+	    }
 
-	public static HashMap<String, User> getUsers() {
-		return users;
-	}
+	    public  User getById(String id){
+	        User client = clientRepository.getUserById(id);
+	        if(client != null) {
+	        	
+	            return client;
+	        }
+	        else {
+	        	log.info("No customer with such id found");
+	            return null;
+	        }
+	    }
 
-	public static void setUsers(HashMap<String, User> users) {
-		UserService.users = users;
-	}
+	    public User getUserByEmail(String email){
+	        User client = clientRepository.getUserByEmail(email);
+	        if(client != null){
+	            return client;
+	        }
+	        else {
+	        	log.info("No customer with such email found");
+	            return null;
+	        }
+	    }
 
+	    public User getUsersByName(String name){
+	        User client = clientRepository.getUserByName(name);
+	        if(client != null){
+	            return client;
+	        }
+	        else {
+	        	log.info("No customer with such name found");
+	            return null;
+	        }
+	    }
 	public void setClientRepository(UserRepository clientRepository) {
 		this.clientRepository = clientRepository;
 	}
@@ -122,6 +77,7 @@ public class UserService {
 			ClientTicketRepository clientTicketRepository) {
 		this.clientTicketRepository = clientTicketRepository;
 	}
+
 	
 	
 

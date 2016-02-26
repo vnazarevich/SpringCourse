@@ -38,46 +38,46 @@ public class ClubManager {
         BookingService bookingService = ctx.getBean("bookingService", BookingService.class);
         DiscountService discountService = ctx.getBean("discountService", DiscountService.class);
 
-//        logger.info("Register user Sheldon, sheldon@google.com");
-//        userService.registerUser("Sheldon", "sheldon@google.com");
-//
-//        logger.info("Check user:");
-//        User user = userService.getUserByName("Sheldon");
-//        logger.info(user.toString());
-//
-//        logger.info("Create event: Star Wars with base price 250.00");
-//        eventService.createEvent("Star Wars", 250, EventRate.HIGH);
-//        
-//        logger.info("Check if event was created:");
-//        Event event = eventService.getEventByName("Star Wars");
-//        logger.info(event.toString());
-//
-//        logger.info("Assigne auditorium");
-//        List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
-//        Auditorium kinopalace;
-//        Show show = null;
-//
-//        for(Auditorium auditorium : auditoriums){
-//            if(auditorium.getName().equals("Kinopalace")){
-//                logger.info(auditorium);
-//                kinopalace = auditorium;
-//                show = eventService.assignAuditorium(event, kinopalace, new GregorianCalendar(2016, 2, 12).getTime());
-//                break;
-//            }
-//        }
-//
-//        logger.info("Show was created:");
-//        if (show != null) {
-//            logger.info(show.toString());
-//        }
-//
-//        logger.info("Get tiket price for the show:");
-//        Ticket ticket = bookingService.getTicketPrice(event, show.getAuditorium(), show.getDate(), 2, user.getName());
-//        logger.info(ticket.toString());
-//
-//        logger.info("Book tiket");
-//        Ticket bookedTicket = bookingService.bookTicket(user.getName(), ticket);
-//        logger.info(bookedTicket.toString());
+        logger.info("Register user Sheldon, sheldon@google.com");
+        userService.registerUser("Sheldon", "sheldon@google.com");
+
+        logger.info("Check user:");
+        User user = userService.getUsersByName("Sheldon");
+        logger.info(user.toString());
+
+        logger.info("Create event: Star Wars with base price 250.00");
+        eventService.create("Star Wars", 250, EventRate.HIGH);
+        
+        logger.info("Check if event was created:");
+        Event event = eventService.getByName("Star Wars");
+        logger.info(event.toString());
+
+        logger.info("Assigne auditorium");
+        List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
+        Auditorium kinopalace;
+        Show show = null;
+
+        for(Auditorium auditorium : auditoriums){
+            if(auditorium.getName().equals("Kinopalace")){
+                logger.info(auditorium);
+                kinopalace = auditorium;
+                show = eventService.assignAuditorium(event, kinopalace, new GregorianCalendar(2016, 2, 12).getTime());
+                break;
+            }
+        }
+
+        logger.info("Show was created:");
+        if (show != null) {
+            logger.info(show.toString());
+        }
+
+        logger.info("Get tiket price for the show:");
+        Ticket ticket = bookingService.getTicketPrice(event, show.getAuditorium(), show.getDate(), 2, user.getName());
+        logger.info(ticket.toString());
+
+        logger.info("Book tiket");
+        Ticket bookedTicket = bookingService.bookTicket(user.getName(), ticket);
+        logger.info(bookedTicket.toString());
 
         //System.out.println("Aspect - " + discountService.getDiscountStatisticsByUser(user));
        // String discount = discountService.getDiscount(user, event.getName(), new GregorianCalendar(2016, 2, 12).getTime());

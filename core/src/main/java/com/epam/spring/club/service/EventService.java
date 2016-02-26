@@ -22,30 +22,20 @@ public class EventService {
 	private ShowRepository showRepository;
 	private TicketRepository ticketRepository;
 
-	public Event createEvent(String eventName, int bacePrice, EventRate rate) {
+	public Event create(String eventName, int bacePrice, EventRate rate) {
 		return eventRepository.createEvent(eventName, bacePrice, rate);
 	}
 
-	public Event removeEvent(String name) {
-		Event event = events.get(name);
-		events.remove(name);
-		log.info("remove event " + name);
-		return event;
+	public Event remove(Event event) {
+		return eventRepository.remove(event);
 	}
 
-	public ArrayList<Event> getAllEvents() {
-		log.info("start getAllEvents(), count = " + events.size() + " events");
-		return new ArrayList(events.values());
+	public Event getByName(String eventName) {
+		return eventRepository.getByName(eventName);
 	}
 
-	public Event getEventByName(String name) {
-		Event event = events.get(name);
-		// log.info("get event " + event.toString() +" by name" );
-		return event;
-	}
-
-	public HashMap<String, Event> getEvents() {
-		return events;
+	public List<Event> getAll() {
+		return eventRepository.getAll();
 	}
 
 	public Show assignAuditorium(Event event, Auditorium auditorium, Date date) {
@@ -54,16 +44,6 @@ public class EventService {
 			createTicketsForTheShow(show, event, auditorium);
 		}
 		return show;
-	}
-
-	public void setEvents(HashMap<String, Event> events) {
-		this.events = events;
-	}
-
-	public void addEvent(Event event) {
-		events.put(event.getName(), event);
-		log.info("add new event " + event.toString());
-
 	}
 
 	public List<Ticket> createTicketsForTheShow(Show show, Event event,
@@ -109,6 +89,4 @@ public class EventService {
 		this.ticketRepository = ticketRepository;
 	}
 
-	
-	
 }
