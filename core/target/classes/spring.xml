@@ -10,6 +10,7 @@
  		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<import resource="repositories.xml" />
+	<import resource="aspects.xml" />
 
 	<aop:aspectj-autoproxy />
 
@@ -25,6 +26,30 @@
 		</property>
 	</bean>
 
+	<bean id="greenAuditorium"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:greenAuditorium.properties" />
+		<property name="placeholderSuffix" value="}" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="placeholderPrefix" value="$green{" />
+		<property name="systemPropertiesMode">
+			<util:constant
+				static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		</property>
+	</bean>
+	
+		<bean id="blackAuditorium"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:blackAuditorium.properties" />
+		<property name="placeholderSuffix" value="}" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="placeholderPrefix" value="$black{" />
+		<property name="systemPropertiesMode">
+			<util:constant
+				static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		</property>
+	</bean>
+	
 	<bean id="planetakino"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:planetakino.properties" />
@@ -72,21 +97,9 @@
 		<property name="countersRepository" ref="countersRepositoryDao" />
 	</bean>
 
-	<bean id="discountService" class="com.epam.spring.club.service.DiscountService">
-		<property name="clientTicketRepository" ref="clientTicketRepositoryDao" />
-	</bean>
-
-	<bean id="counterAspect" class="com.epam.spring.aspect.CounterAspect">
-		<property name="showRepository" ref="showRepositoryDao" />
-		<property name="countersRepository" ref="countersRepositoryDao" />
-	</bean>
-
 	<bean id="clubManager" class="com.epam.spring.club.ClubManager">
 
 	</bean>
-
-	<bean id="luckyWinnerAspect" class="com.epam.spring.aspect.LuckyWinnerAspect">
-		<property name="clientTicketRepository" ref="clientTicketRepositoryDao"></property>
-	</bean>
+	
 
 </beans>

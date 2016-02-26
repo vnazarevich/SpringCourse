@@ -63,7 +63,7 @@ public class ClubManager {
 		Auditorium kinopalace;
 		Show show = null;
 		for (Auditorium auditorium : auditoriums) {
-			if (auditorium.getName().equals("Kinopalace")) {
+			if (auditorium.getName().equals("Green")) {
 				logger.info(auditorium);
 				kinopalace = auditorium;
 				show = eventService.assignAuditorium(event, kinopalace,

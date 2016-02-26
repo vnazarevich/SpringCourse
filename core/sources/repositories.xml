@@ -15,42 +15,17 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 
-
-	<!-- <bean id="auditoriumRepositoryStatic" class="com.epam.spring.club.DAO.pojo.AuditoriumRepositoryDAO"> 
-		<property name="auditoriumList"> <list> <bean id="auditorium" class="com.epam.spring.club.model.Auditorium"> 
-		<constructor-arg value="$kp{name}"/> <constructor-arg value="$kp{seatsNumber}"/> 
-		<constructor-arg value="#{'$kp{vipSeats}'.split(',')}"/> <property name="auditoriumId" 
-		value="$kp{id}"/> </bean> <bean id="auditorium" class="com.epam.spring.club.model.Auditorium"> 
-		<constructor-arg value="$pk{name}"/> <constructor-arg value="$pk{seatsNumber}"/> 
-		<constructor-arg value="#{'$pk{vipSeats}'.split(',')}"/> <property name="auditoriumId" 
-		value="$pk{id}"/> </bean> <bean id="auditorium" class="com.epam.spring.club.model.Auditorium"> 
-		<constructor-arg value="$dn{name}"/> <constructor-arg value="$dn{seatsNumber}"/> 
-		<constructor-arg value="#{'$dn{vipSeats}'.split(',')}"/> <property name="auditoriumId" 
-		value="$dn{id}"/> </bean> </list> </property> </bean> -->
-
-
 	<bean id="auditoriumRepositoryDao" class="com.epam.spring.club.DAO.AuditoriumRepositoryDao">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 		<property name="auditoriumList">
 			<list>
-				<bean id="auditorium" class="com.epam.spring.club.models.Auditorium">
-					<constructor-arg value="$kp{name}" />
-					<constructor-arg value="$kp{seatsNumber}" />
-					<constructor-arg value="#{'$kp{vipSeats}'.split(',')}" />
-					<property name="auditoriumId" value="$kp{id}" />
+				<bean id="auditoriumGreen" class="com.epam.spring.club.models.Auditorium">
+					<constructor-arg value="$green{name}" />
+					<constructor-arg value="$green{seatsNumber}" />
+					<constructor-arg value="#{'$green{vipSeats}'.split(',')}" />
+					<property name="auditoriumId" value="$green{id}" />
 				</bean>
-				<bean id="auditorium" class="com.epam.spring.club.models.Auditorium">
-					<constructor-arg value="$pk{name}" />
-					<constructor-arg value="$pk{seatsNumber}" />
-					<constructor-arg value="#{'$pk{vipSeats}'.split(',')}" />
-					<property name="auditoriumId" value="$pk{id}" />
-				</bean>
-				<bean id="auditorium" class="com.epam.spring.club.models.Auditorium">
-					<constructor-arg value="$dn{name}" />
-					<constructor-arg value="$dn{seatsNumber}" />
-					<constructor-arg value="#{'$dn{vipSeats}'.split(',')}" />
-					<property name="auditoriumId" value="$dn{id}" />
-				</bean>
+
 			</list>
 		</property>
 	</bean>
